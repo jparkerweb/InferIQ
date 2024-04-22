@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Grouping by QA Score</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .wrapper {
+            width: 97vw;
+            height: 97vw;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <a href="/page-chart-scores" class="subpage__back-link">⇠ back</a>
+    <div class="wrapper">
+        <canvas id="ratingsChart"></canvas>
+    </div>
+    
+    <script>
+        fetch('/ratings-by-model')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('ratingsChart').getContext('2d');
+                const datasets = [];
+                const models = [...new Set(data.map(item => item.chatModel))];
+                
+                // Sort the ratings numerically in descending order
+                const uniqueRatings = [...new Set(data.map(item => item.judgeRating))];
+                uniqueRatings.sort((a, b) => b - a);
+
+                models.forEach(model => {
+                    const modelData = data.filter(item => item.chatModel === model);
+                    datasets.push({
+                        label: model,
+                        data: uniqueRatings.map(rating => {
+                            const item = modelData.find(item => item.judgeRating === rating);
+                            return item ? item.count : 0;
+                        }),
+                        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.7)`,
+                        borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                        borderWidth: 1
+                    });
+                });
+
+                const ratingsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: uniqueRatings,
+                        datasets: datasets
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'white'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'white'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ddd',
+                                    font: {
+                                        size: 16
+                                    }
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '📊 Model Grouping by QA Score',
+                                color: 'white',
+                                font: {
+                                    size: 30,
+                                    weight: 'normal'
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

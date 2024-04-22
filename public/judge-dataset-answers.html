@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge Dataset Answers</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper flex-justify-center">
+        <h1 class="title" class="font-3em">🗡️ <span class="fancy">Judge Dataset Answers</span></h1>
+        <button id="judgeBtn">Start Judging</button>
+        <button id="cancelBtn" class="hidden">Cancel Judging</button>
+        <div id="loader" class="loader hidden"></div>
+        <div id="progressArea">
+            <p>Status: <span id="status">Waiting to start...</span></p>
+            <div id="feedbackMessage"></div>
+            <div id="currentMessageCount"></div>
+            <div id="model"></div>
+            <div id="judgeModel"></div>
+            <div id="questionLabel"></div>
+        </div>
+    </div>
+
+    <script src="judge-dataset-answers.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Average QA Score by Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .wrapper {
+            width: 97vw;
+            height: 97vw;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <a href="/page-chart-scores" class="subpage__back-link">⇠ back</a>
+    <div class="wrapper">
+        <canvas id="ratingsChart"></canvas>
+    </div>
+    
+    <script>
+        fetch('/avg-rating-by-model')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                const ctx = document.getElementById('ratingsChart').getContext('2d');
+                const backgroundColors = data.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.7)`);
+                const borderColors = data.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`);
+
+                const ratingsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(item => item.chatModel),
+                        datasets: [{
+                            label: 'Average Rating',
+                            data: data.map(item => item.avgRating),
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'white'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'white'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ddd',
+                                    font: {
+                                        size: 16
+                                    }
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '📊 Average QA Score by Model',
+                                color: 'white',
+                                font: {
+                                    size: 30,
+                                    weight: 'normal'
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

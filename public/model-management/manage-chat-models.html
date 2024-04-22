@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Chat Models</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        input[type="text"], select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+        ul#chatModelsList {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 80vw;
+            overflow: auto;
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            font-size: 1.2em;
+        }
+        ul#chatModelsList > li {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        ul#chatModelsList > li div {
+            user-select: text !important;
+        }
+        ul#chatModelsList > li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <a href="/page-model-management" class="subpage__back-link">⇠ back</a>
+        <h1 class="title">💬 <span class="fancy">Manage Chat Models</span></h1>
+        
+        <form id="chatModelForm" class="flex-column-left">
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-110">chat model:</span>
+                <input type="text" id="chatModel" name="chatModel" style="width: 500px;" placeholder="example value ⇢ teknium/OpenHermes-2p5-Mistral-7B">
+            </div>
+            
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-110">stop tokens:</span>
+                <input type="text" id="stopTokens" name="stopTokens" style="width: 500px;" placeholder='example value ⇢ ["</s>", "<|im_end|>", "<|user|>", "USER:"]'>
+            </div>
+            <div class="margin-bottom-10">
+                <span class="margin-right-10 accent label width-110">OpenAI API:</span>
+                <select id="openaiAPIs" name="openaiAPIs" class="nudge-left-n4" style="width: 500px;"><option></option></select>
+            </div>
+            <div class="flex-row-center width-100pct">
+                <button type="submit" id="chatModelFormButton" class="medium">Add Chat Model</button>
+                <button type="button" id="cancelEditButton" class="cancel medium" style="display: none;">Cancel Edit</button>
+            </div>
+        </form>
+        
+        <ul id="chatModelsList" class="flex-1">
+            <!-- Chat Models will be loaded here dynamically -->
+        </ul>
+        <div id="feedback"></div>
+    </div>
+    <script src="/model-management/manage-chat-models.js" type="module"></script>
+</body>
+</html>

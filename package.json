@@ -1,0 +1,39 @@
+{
+  "name": "InferIQ",
+  "version": "1.0.0",
+  "description": "🧠 InferIQ is an LLM Evaluation framework that leverages LLMs to Evaluate other LLMs ",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jparkerweb/InferIQ.git"
+  },
+  "type": "module",
+  "scripts": {
+    "setup": "npm ci",
+    "server": "node server.js",
+    "start": "npm run server"
+  },
+  "keywords": [
+    "LLM",
+    "Judge",
+    "AI",
+    "OpenAI",
+    "eval",
+    "evaluation",
+    "rating",
+    "scoring"
+  ],
+  "author": "Justin Parker",
+  "license": "ISC",
+  "dependencies": {
+    "@xenova/transformers": "^2.16.1",
+    "dedent": "^1.5.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "fs": "^0.0.1-security",
+    "markdown-it": "^14.1.0",
+    "markdown-it-attrs": "^4.1.6",
+    "markdown-it-prism": "^2.3.0",
+    "openai": "^4.29.2",
+    "sqlite3": "^5.1.7"
+  }
+}

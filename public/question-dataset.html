@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Dataset</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+        textarea {
+            width: calc(100vw - 340px);
+            max-width: 80vw;
+            height: 15vh;
+            min-height: 95px;
+            border-radius: 5px;
+            resize: none;
+            padding: 15px;
+            background: #2e343f;
+            color: white;
+        }
+        ul#questionsList {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 80vw;
+            overflow: auto;
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            font-size: 1.2em;
+        }
+        ul#questionsList > li {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <h1 class="title">📄 <span class="fancy">Question Dataset</span></h1>
+        
+        <form id="questionForm">
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent">type:</span>
+                <select id="questionType" name="questionType" class="margin-right-20">
+                    <option value="summary">Summary</option>
+                    <option selected value="qa">Question Answer</option>
+                </select>
+                <span class="margin-right-10 accent">label:</span>
+                <input type="text" id="questionLabel" name="questionLabel" style="width: 300px;">
+            </div>
+            <textarea type="text" id="questionInput" name="question" placeholder="enter a question here..."></textarea>
+            <div>
+                <button type="submit" id="questionFormButton" class="medium">Add Question</button>
+                <button type="button" id="cancelEditButton" class="cancel medium" style="display: none;" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+        </form>
+        
+        <ul id="questionsList" class="flex-1">
+            <!-- Questions will be loaded here dynamically -->
+        </ul>
+        <div id="feedback"></div>
+    </div>
+
+    <script src="question-dataset.js" type="module"></script>
+</body>
+</html>

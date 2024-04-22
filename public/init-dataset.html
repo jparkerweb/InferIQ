@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Dataset</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper flex-justify-center">
+        <h1 class="title font-size-3em">✨ <span class="fancy">Initialize Dataset</span></h1>
+        <button id="initBtn">Start Initialization</button>
+        <button id="cancelBtn" class="hidden">Cancel Initialization</button>
+        <div id="loader" class="loader hidden"></div>
+        <div id="progressArea">
+            <p>Status: <span id="status">Waiting to start...</span></p>
+            <div id="feedbackMessage"></div>
+            <div id="messageId"></div>
+            <div id="model"></div>
+            <div id="questionLabel"></div>
+        </div>
+    </div>
+
+    <script src="init-dataset.js"></script>
+</body>
+</html>

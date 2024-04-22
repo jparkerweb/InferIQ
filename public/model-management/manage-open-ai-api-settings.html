@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage OpenAI API Settings</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        input[type="number"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <a href="/page-model-management" class="subpage__back-link">⇠ back</a>
+        <h1 class="title">🧪 <span class="fancy">Manage OpenAI API Settings</span></h1>
+        
+        <form id="openaiAPISettingsForm">
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-160">temperature:</span>
+                <input type="number" step="any" id="temperature" name="temperature" style="width: 70px;">
+            </div>
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-160">max response tokens:</span>
+                <input type="number" id="maxResponseTokens" name="maxResponseTokens" style="width: 70px;">
+            </div>            
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-160">rate limit (ms):</span>
+                <input type="number" id="rateLimit" name="rateLimit" style="width: 70px;">
+            </div>
+            <div>
+                <button type="submit" id="openaiAPISettingsFormButton" class="medium">Update OpenAI API Settings</button>
+            </div>
+        </form>
+        
+        <div id="feedback"></div>
+    </div>
+
+    <script src="/model-management/manage-open-ai-api-settings.js" type="module"></script>
+</body>
+</html>

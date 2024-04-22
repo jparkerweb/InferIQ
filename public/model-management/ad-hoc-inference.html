@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ad Hoc Inference</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+        textarea {
+            width: 700px;
+            height: 70px;
+            border-radius: 5px;
+            resize: none;
+            padding: 13px;
+            background: #2e343f;
+            color: white;
+        }
+        ul#inferenceHistoryList {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 80vw;
+            overflow: auto;
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            font-size: 1.2em;
+        }
+        ul#inferenceHistoryList > li {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        ul#inferenceHistoryList > li div {
+            user-select: text !important;
+        }
+        ul#inferenceHistoryList > li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <a href="/page-model-management" class="subpage__back-link">⇠ back</a>
+        <h1 class="title">🛩️ <span class="fancy">Ad Hoc Inference</span></h1>
+        
+        <form id="adHocInferenceForm">
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-100">model</span>
+                <select id="model" name="model" style="width: 700px;"></select>
+            </div>
+            <div class="margin-bottom-10">
+                <span class="margin-right-10 accent label vertical-align-top width-100">prompt</span>
+                <textarea type="text" id="prompt" name="prompt" placeholder="enter a new prompt here..."></textarea>
+            </div>                
+            <div>
+                <div id="buttons">
+                    <button type="button" id="reloadPageButton" class="medium">Reload</button>
+                    <button type="button" id="randomQuestionButton" class="medium purple">Random Question</button>
+                    <button type="submit" id="adHocInferenceFormButton" class="medium green">Submit Prompt</button>
+                </div>
+                <div id="loader" class="loader hidden"></div>
+            </div>
+        </form>
+        
+        <ul id="inferenceHistoryList" class="flex-1">
+            <!-- Inference History will be dynamically added here -->
+        </ul>
+        <div id="feedback"></div>
+    </div>
+
+    <script src="/model-management/ad-hoc-inference.js" type="module"></script>
+</body>
+</html>

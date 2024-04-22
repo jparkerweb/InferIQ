@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Dataset</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .wrapper--textarea {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        textarea {
+            width: calc(100vw - 340px - 30vw);
+            height: 15vh;
+            border-radius: 5px;
+            resize: none;
+            padding: 15px;
+            background: #2e343f;
+            color: white;
+        }
+        textarea.--message {
+            margin-right: 10px;
+            max-width: 45vw;
+        }
+        textarea.--summary {
+            max-width: 20vw;
+        }
+        ul#messagesList {
+            display: inline-flex;
+            flex-direction: column;
+            margin-top: 10px;
+            padding: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            text-align: left;
+            width: 100%;
+            max-width: 80vw;
+        }
+        li {
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        .full--displayed {
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+            cursor: unset;
+        }
+        button.delete {
+            margin-left: 0;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <h1 class="title">📄 <span class="fancy">Message Dataset</span></h1>
+        
+        <form id="messageForm">
+            <div class="wrapper--textarea">
+                <div>
+                    <div class="text-align-left accent2 padding-left-15">message</div>
+                    <textarea class="--message" type="text" id="messageInput" name="message" placeholder="enter a new message here..."></textarea>
+                </div>
+                <div>
+                    <div class="text-align-left accent2 padding-left-15">grounded truth summary (optional)</div>
+                    <textarea class="--summary" type="text" id="groundedTruthSummaryInput" name="groundedTruthSummary" placeholder="(optional) enter the message summary here..."></textarea>
+                </div>
+            </div>
+            <div>
+                <button type="submit" id="messageFormButton" class="medium">Add Message</button>
+                <button type="button" id="cancelEditButton" class="cancel medium" style="display: none;" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+        </form>
+        
+        <ul id="messagesList" class="flex-1">
+            <!-- Messages will be loaded here dynamically -->
+        </ul>
+        <div id="pagination">
+            <button class="small" onclick="loadMessages(1)">First</button>
+            <button class="small" id="prevButton" onclick="loadMessages(currentPage - 1)">Previous</button>
+            <button class="small" id="nextButton" onclick="loadMessages(currentPage + 1)">Next</button>
+        </div>
+        <div id="feedback"></div>
+    </div>
+    <script src="message-dataset.js"></script>
+</body>
+</html>

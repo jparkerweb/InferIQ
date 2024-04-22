@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage BERT Models</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+        ul#onnxBERTModelsList {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 80vw;
+            overflow: auto;
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            font-size: 1.2em;
+        }
+        ul#onnxBERTModelsList > li {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        ul#onnxBERTModelsList > li div {
+            user-select: text !important;
+        }
+        ul#onnxBERTModelsList > li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <a href="/page-model-management" class="subpage__back-link">⇠ back</a>
+        <h1 class="title">🪣 <span class="fancy">Manage BERT Models</span></h1>
+        
+        <form id="onnxBERTModelForm">
+            <div class="margin-bottom-20 flex-column-left">
+                <div class="flex-row-center margin-bottom-10">
+                    <span class="margin-right-10 width-100 accent">BERT model:</span>
+                    <input type="text" id="onnxBERTModel" name="onnxBERTModel" style="width: 500px;" placeholder="example ⇢ Xenova/paraphrase-multilingual-MiniLM-L12-v2">
+                </div>
+                <div class="flex-row-center">
+                    <span class="margin-right-10 width-100 accent">quantized:</span>
+                    <select id="onnxBERTModelQuantized" name="onnxBERTModelQuantized" class="margin-right-20">
+                        <option value="0">no</option>
+                        <option selected value="1">yes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="margin-bottom-10 text-align-left color-light" style="max-width: 700px;">
+                BERT models are used to calcuate the simlarity score (BERT Score) between two strings. Hugging Face provides a wide range of BERT models that can be used for this purpose. You can find the list of available models <a href="https://huggingface.co/models?pipeline_tag=feature-extraction&library=onnx&sort=downloads" target="_hugging-face" class="accent normal-link">here 🤗</a>.
+            </div>
+            <div>
+                <button type="submit" id="onnxBERTModelFormButton" class="medium">Add BERT Model</button>
+                <button type="button" id="cancelEditButton" class="cancel medium" style="display: none;" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+        </form>
+        
+        <ul id="onnxBERTModelsList" class="flex-1">
+            <!-- BERT Models will be loaded here dynamically -->
+        </ul>
+        <div id="feedback"></div>
+    </div>
+
+    <script src="/model-management/manage-bert-models.js"></script>
+</body>
+</html>

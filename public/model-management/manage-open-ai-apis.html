@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage OpenAI APIs</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc28;
+        }
+        ul#openaiAPIsList {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 80vw;
+            overflow: auto;
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            font-size: 1.2em;
+        }
+        ul#openaiAPIsList > li {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            white-space: pre;
+            word-break: break-word;
+            text-wrap: wrap;
+        }
+        ul#openaiAPIsList > li div {
+            user-select: text !important;
+        }
+        ul#openaiAPIsList > li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!--nav-->
+    <div class="wrapper margin-top-20">
+        <a href="/page-model-management" class="subpage__back-link">⇠ back</a>
+        <h1 class="title">📞 <span class="fancy">Manage OpenAI APIs</span></h1>
+        
+        <form id="openaiAPIForm">
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-100">name:</span>
+                <input type="text" id="openaiAPIName" name="openaiAPIName" style="width: 500px;" placeholder="example value ⇢ together.ai">
+            </div>
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-100">url:</span>
+                <input type="text" id="openaiAPIUrl" name="openaiAPIUrl" style="width: 500px;" placeholder="example value ⇢ https://api.together.xyz/v1">
+            </div>            
+            <div class="margin-bottom-10 flex-row-center">
+                <span class="margin-right-10 accent label width-100">API key:</span>
+                <input type="text" id="openaiAPIAPIKey" name="openaiAPIAPIKey" style="width: 500px;">
+            </div>
+            <div>
+                <button type="submit" id="openaiAPIFormButton" class="medium">Add OpenAI API</button>
+                <button type="button" id="cancelEditButton" class="cancel medium" style="display: none;">Cancel Edit</button>
+            </div>
+        </form>
+        
+        <ul id="openaiAPIsList" class="flex-1">
+            <!-- OpenAI APIs will be loaded here dynamically -->
+        </ul>
+        <div id="feedback"></div>
+    </div>
+
+    <script src="/model-management/manage-open-ai-apis.js" type="module"></script>
+</body>
+</html>

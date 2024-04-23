@@ -5,16 +5,6 @@ export const seedChatModels = [
         "openaiAPIId": 1
     },
     {
-        "chatModel": "mistral.mixtral-8x7b-instruct-v0:1",
-        "stopTokens": ["[/INST]", "</s>"],
-        "openaiAPIId": 2
-    },
-    {
-        "chatModel": "mistral.mixtral-8x7b-instruct-v0:1",
-        "stopTokens": ["[/INST]", "</s>"],
-        "openaiAPIId": 3
-    },
-    {
         "chatModel": "meta-llama/Llama-3-70b-chat-hf",
         "stopTokens": ["<|eot_id|>"],
         "openaiAPIId": 1

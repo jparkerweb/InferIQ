@@ -884,8 +884,10 @@ app.get('/page-delete-db', (req, res) => {
 
 // Start the server on the specified port
 app.listen(port, () => {
-    console.log('\n\n\n');
-    console.log(`Server running on port ${port}`);
-    console.log(`http://localhost:${port}`);
-    console.log('\n\n');
+    setTimeout(() => {
+        console.log('\n\n\n');
+        console.log(`Server running on port ${port}`);
+        console.log(`http://localhost:${port}`);
+        console.log('\n\n');
+    }, 3000);
 });

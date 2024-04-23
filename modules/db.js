@@ -11,7 +11,7 @@ import { seedOpenaiAPISettings } from '../data/seedOpenaiAPISettings.js';
 // -- create inital DB connection and tables --
 // --------------------------------------------
 const initializeDatabase = () => {
-    let db = new sqlite3.Database('./data/aiEval.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+    let db = new sqlite3.Database('./data/InferIQ.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
         if (err) {
             console.error(err.message);
             return;

@@ -125,7 +125,7 @@ div.wrapper > * {
     font-weight: 600;
 }
 .title > .fancy {
-    background-image: linear-gradient(135deg, #00C0FA 0%, #4261ED 50%, #6717CC 100%);
+    background-image: linear-gradient(135deg, #00C0FA 0%, #ff00bb 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

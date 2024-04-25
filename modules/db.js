@@ -905,16 +905,16 @@ export function listAllModelsForAdHocInference() {
     return new Promise((resolve, reject) => {
         const sql = `
             SELECT
-                chatModels.chatModel AS model, chatModels.stopTokens,
+                chatModels.chatModel AS model, chatModels.stopTokens, 'chat' as source,
                 openaiAPIs.name as apiName, openaiAPIs.url as apiUrl, openaiAPIs.apiKey
             FROM chatModels
             LEFT OUTER JOIN openaiAPIs
                 on chatModels.openaiAPIId = openaiAPIs.id
-        
-            UNION ALL
-        
+
+            UNION
+
             SELECT
-                judgeModels.judgeModel AS model, judgeModels.stopTokens,
+                judgeModels.judgeModel AS model, judgeModels.stopTokens, 'judge' as source,
                 openaiAPIs.name as apiName, openaiAPIs.url as apiUrl, openaiAPIs.apiKey
             FROM judgeModels
             LEFT OUTER JOIN openaiAPIs

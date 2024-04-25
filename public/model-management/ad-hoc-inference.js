@@ -100,7 +100,12 @@ function submitAdHocInference() {
         buttons.classList.remove('hidden');
         loader.classList.add('hidden');
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        setFeedback(error);
+        buttons.classList.remove('hidden');
+        loader.classList.add('hidden');
+    })
 }
 
 function setupModelOptions() {
@@ -120,7 +125,7 @@ function setupModelOptions() {
                 "apiKey": model.apiKey
             };
             option.value = JSON.stringify(optionValue);
-            option.textContent = `${model.model} ⇢ ${model.apiName}`;
+            option.textContent = `${model.model} ⇢ ${model.apiName} [${model.source}]`;
             selectBox.appendChild(option);
         });
     })

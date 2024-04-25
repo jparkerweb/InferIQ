@@ -75,7 +75,7 @@ export async function judgeGeneratedDataset(sendEvent, context) {
 
         // Use regular expressions to parse the input string
         const ratingRegex = /Total rating:\s(\d+)/;
-        const reasonRegex = /(?:\w+:\s)?([\s\S]+?)\n[\n\s\S]*/gm;
+        const reasonRegex = /^(?:Feedback:::\n)?(?:\w+:\s)?([\s\S]+?)\n[\n\s\S]*/gm;
 
         // Extract the rating
         const ratingMatch = judgeFullResponse.llmResponseText.match(ratingRegex);

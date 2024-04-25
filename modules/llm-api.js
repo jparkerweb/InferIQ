@@ -10,13 +10,17 @@ import OpenAI from 'openai';
 // ---------------------------------------------------
 export async function fetchChatCompletion(url, apiKey, model, stopTokens, prompt) {
     const openaiAPISettings = await getOpenaiAPISettings();
+    const rateLimit = openaiAPISettings[0].rateLimit;
+    const maxResponseTokens = openaiAPISettings[0].maxResponseTokens;
+    const temperature = openaiAPISettings[0].temperature;
+
     const openai = new OpenAI({
         baseURL: url,
         apiKey: apiKey,
     });
 
     // wait for the rate limit delay before making the request
-    await new Promise(resolve => setTimeout(resolve, openaiAPISettings[0].rateLimit));
+    await new Promise(resolve => setTimeout(resolve, rateLimit));
 
     if (typeof prompt === 'string') {
         prompt = JSON.parse(prompt);
@@ -32,15 +36,20 @@ export async function fetchChatCompletion(url, apiKey, model, stopTokens, prompt
     const chatCompletion = await openai.chat.completions.create({
         messages: prompt,
         model: model,
-        max_tokens: openaiAPISettings[0].maxResponseTokens,
+        max_tokens: maxResponseTokens,
         stop: stopTokens,
-        temperature: openaiAPISettings[0].temperature,
+        temperature: temperature,
         top_p: 0.7,
         stream: true,
     })
     for await (const chunk of chatCompletion) {
         if (!endTime) { endTime = performance.now(); }
         llmResponseText += chunk.choices[0]?.delta?.content || "";
+        console.log(chunk.choices[0]?.delta?.content)
+        const finished = chunk.choices[0]?.finish_reason === "stop";
+        if (finished) {
+            console.log("Finished");
+        }
     }
 
     let inferenceTimeToFirstTokenSeconds = (endTime - startTime) / 1000;

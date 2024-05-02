@@ -2,7 +2,7 @@ export const seedQuestions = [
     {
         "type": "summary",
         "label": "📝 Summary",
-        "question": "Please provide a concise summary of this message, focusing on its key points. Limit your response to a few sentences, using simple and clear language."
+        "question": "Please provide a concise summary of this message, focusing on its key points. Limit your response to five sentences, using simple and clear language."
     },
     {
         "type": "qa",

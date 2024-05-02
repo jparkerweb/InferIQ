@@ -44,11 +44,8 @@ export async function fetchChatCompletion(url, apiKey, model, stopTokens, prompt
     for await (const chunk of chatCompletion) {
         if (!endTime) { endTime = performance.now(); }
         llmResponseText += chunk.choices[0]?.delta?.content || "";
-        console.log(chunk.choices[0]?.delta?.content)
-        const finished = chunk.choices[0]?.finish_reason === "stop";
-        if (finished) {
-            console.log("Finished");
-        }
+        // console.log(chunk.choices[0]?.delta?.content)
+        // if (chunk.choices[0]?.finish_reason === "stop") { console.log("Finished"); }
     }
 
     let inferenceTimeToFirstTokenSeconds = (endTime - startTime) / 1000;

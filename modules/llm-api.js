@@ -14,11 +14,6 @@ export async function fetchChatCompletion(url, apiKey, model, stopTokens, prompt
     const maxResponseTokens = openaiAPISettings[0].maxResponseTokens;
     const temperature = openaiAPISettings[0].temperature;
 
-    const openai = new OpenAI({
-        baseURL: url,
-        apiKey: apiKey,
-    });
-
     // wait for the rate limit delay before making the request
     await new Promise(resolve => setTimeout(resolve, rateLimit));
 
@@ -33,6 +28,10 @@ export async function fetchChatCompletion(url, apiKey, model, stopTokens, prompt
     const startTime = performance.now();
     let endTime;
 
+    const openai = new OpenAI({
+        baseURL: url,
+        apiKey: apiKey,
+    });
     const chatCompletion = await openai.chat.completions.create({
         messages: prompt,
         model: model,

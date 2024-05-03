@@ -1411,9 +1411,9 @@ export function avgInferenceTimeSecondsByModel() {
     });
 }
 
-// ------------------------------------
+// ------------------------------------------------
 // -- avgInferenceTimeToFirstTokenSecondsByModel --
-// ------------------------------------
+// ------------------------------------------------
 export function avgInferenceTimeToFirstTokenSecondsByModel() {
     return new Promise((resolve, reject) => {
         const sql = `

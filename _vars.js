@@ -44,16 +44,18 @@ Here is the scale you should use to build your answer:
 9: The system_answer is nearly excellent: very relevant, detailed, and addresses almost all concerns raised in the question.
 10: The system_answer is excellent: completely relevant, direct, detailed, and comprehensively addresses all the concerns raised in the question.
 
-Provide your feedback as follows:
+Always answer in JSON format:::
+{
+  "total_rating": <total_rating>,
+  "evaluation": "<evaluation>"
+}
 
-Feedback:::
-Evaluation: (your rationale for the rating, as a text)
-Total rating: (your rating, as a number between 1 and 10)
 
-You MUST provide values for 'Evaluation:' and 'Total rating:' in your answer.
 Example feedback:::
-Evaluation: The answer is very relevant and confirms the question of why LLM judging is good.
-Total rating: 9
+{
+    "total_rating": 9,
+    "evaluation": "The answer is very relevant and confirms the question of why LLM judging is good."
+}
 
 Now here is the question and answer.
 `
@@ -68,4 +70,4 @@ export const PROMT_JUDGE_SUFFIX = `
 
 Provide your feedback. If you give a correct rating, I'll give you $100 tip.
 Feedback:::
-Evaluation: `
+`

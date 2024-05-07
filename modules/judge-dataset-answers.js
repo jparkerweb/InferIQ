@@ -73,16 +73,9 @@ export async function judgeGeneratedDataset(sendEvent, context) {
             judgePrompt
         )
 
-        // Use regular expressions to parse the input string
-        const ratingRegex = /Total rating:\s(\d+)/;
-        const reasonRegex = /^(?:Feedback:::\n)?(?:\w+:\s)?([\s\S]+?)\n[\n\s\S]*/gm;
-
-        // Extract the rating
-        const ratingMatch = judgeFullResponse.llmResponseText.match(ratingRegex);
-        const judgeRating = ratingMatch ? parseInt(ratingMatch[1], 10) : -1;
-
-        // Extract the reason
-        const judgeReasoning = judgeFullResponse.llmResponseText.replace(reasonRegex, `$1`)
+        const parsedResponse = parseLLMResponse(judgeFullResponse.llmResponseText);
+        const judgeRating = parsedResponse.judgeRating;
+        const judgeReasoning = parsedResponse.judgeReasoning;
 
         // update the database with the judged answer
         console.log(judgeFullResponse.llmResponseText);
@@ -195,4 +188,28 @@ export async function judgeGeneratedDataset(sendEvent, context) {
     console.log('onnxBERTModel with grounded truth dataset complete')
 
     sendEvent({ message: 'Judging complete' }); // do not change this message as it is used to stop the judging in public/judge-dataset-answers.js
+}
+
+
+// -----------------------------------------------
+// -- Helper function to parse the LLM response --
+// -----------------------------------------------
+function parseLLMResponse(responseText) {
+    let judgeRating = 1;   // Default value if parsing fails or if 'total_rating' is not found
+    let judgeReasoning = null; // Default value if parsing fails or if 'evaluation' is not found
+
+    try {
+        const responseObject = JSON.parse(responseText);
+        
+        // Check if responseObject is indeed an object and has the properties
+        if (responseObject && typeof responseObject === 'object') {
+            judgeRating = responseObject.total_rating || judgeRating; // Use default if total_rating is missing
+            judgeReasoning = responseObject.evaluation || judgeReasoning; // Use default if evaluation is missing
+        }
+    } catch (e) {
+        // Parsing failed, variables will retain their default values
+        console.error("Error parsing JSON:", e);
+    }
+
+    return { judgeRating, judgeReasoning };
 }

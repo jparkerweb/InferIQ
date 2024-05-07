@@ -1,6 +1,6 @@
 {
   "name": "InferIQ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "🧠 InferIQ is an LLM Evaluation framework that leverages LLMs to Evaluate other LLMs ",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "markdown-it": "^14.1.0",
     "markdown-it-attrs": "^4.1.6",
     "markdown-it-prism": "^2.3.0",
-    "openai": "^4.38.4",
+    "openai": "4.42.0",
     "sqlite3": "^5.1.7"
   }
 }

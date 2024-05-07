@@ -1,4 +1,5 @@
 let currentPage = 1; // This will hold the current page number
+let totalPages = 0; // This will hold the total number of pages
 
 function setFeedback(message) {
     const feedback = document.getElementById('feedback');
@@ -88,7 +89,7 @@ function loadGeneratedDataset(page) {
     .then(data => {
         const generatedDataset = data.generatedDataset;
         const total = data.total;
-        const totalPages = Math.ceil(total / 10); // Assuming 10 messages per page
+        totalPages = Math.ceil(total / 10); // Assuming 10 messages per page
 
         const generatedDatasetTableBody = document.getElementById('generatedDatasetTableBody');
         generatedDatasetTableBody.innerHTML = '';
@@ -123,10 +124,17 @@ function loadGeneratedDataset(page) {
             generatedDatasetTableBody.appendChild(tr);
         });
 
-        // Enable/Disable Previous button
+        // Update pagination controls based on the current page and total pages
+        document.querySelector('#firstButton').disabled = currentPage === 1;
         document.querySelector('#prevButton').disabled = currentPage <= 1;
-        // Enable/Disable Next button
         document.querySelector('#nextButton').disabled = currentPage >= totalPages;
+        document.querySelector('#lastButton').disabled = currentPage === totalPages;
+
+        // Display total results
+        const totalResultsCountMessage = document.getElementById('totalResultsCountMessage');
+        const totalPagesCountMessage = document.getElementById('totalPagesCountMessage');
+        totalResultsCountMessage.innerHTML = `${total} results`;
+        totalPagesCountMessage.innerHTML = `page ${currentPage} of ${totalPages}`;
 
         if (total === 0) {
             document.getElementById('pagination').classList.add('display-none');
@@ -186,7 +194,7 @@ function openDatasetModal(id) {
                 </div>
                 <div class="grid-item">
                     <span class="label">question &nbsp; ❔</span>
-                    <span class="content">${dataset.questionLabel} ⇢ ${dataset.question}</span>
+                    <span class="content"><span class="accent2">${dataset.questionLabel}</span> <span class="accent3">⇢</span> ${dataset.question}</span>
                 </div>
         `;
 
@@ -216,12 +224,12 @@ function openDatasetModal(id) {
                     <div>${judgeScore}</div>
                 </div>
                 <div class="grid-item">
-                    <span class="label">judge model &nbsp; 🧑‍⚖️</span>
-                    <span class="content">${dataset.judgeModel}</span>
-                </div>
-                <div class="grid-item">
                     <span class="label">judge reasoning &nbsp; 🧪</span>
                     <span class="content">${dataset.judgeReasoning}</span>
+                </div>
+                <div class="grid-item">
+                    <span class="label">judge model &nbsp; 🧑‍⚖️</span>
+                    <span class="content">${dataset.judgeModel}</span>
                 </div>
                 <div class="grid-item">
                     <span class="label">judge full response &nbsp; 📰</span>

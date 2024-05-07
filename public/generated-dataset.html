@@ -181,9 +181,15 @@
         <div id="noGeneratedDataset" class="color-error display-none">😭 No generated dataset found</div>
 
         <div id="pagination" class="display-none">
-            <button class="small" onclick="loadGeneratedDataset(1)">First</button>
+            <button class="small" id="firstButton" onclick="loadGeneratedDataset(1)">First</button>
             <button class="small" id="prevButton" onclick="loadGeneratedDataset(currentPage - 1)">Previous</button>
+            <span class="font-p8em">
+                <span class="accent" id="totalResultsCountMessage">0</span>
+                <span class="accent3">|</span>
+                <span class="accent2" id="totalPagesCountMessage">0</span>
+            </span>
             <button class="small" id="nextButton" onclick="loadGeneratedDataset(currentPage + 1)">Next</button>
+            <button class="small" id="lastButton" onclick="loadGeneratedDataset(totalPages)">Last</button>
         </div>
         <div id="feedback"></div>
     </div>

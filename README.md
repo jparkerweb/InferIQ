@@ -23,3 +23,8 @@ InferIQ is a NodeJS application designed to generate answers to questions using 
 ---
 
 ![home](./docs/home.png)
+
+---
+
+Please consider sending me a tip to support my work 😀
+# [🍵 tip me here](https://ko-fi.com/jparkerweb)
